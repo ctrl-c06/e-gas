@@ -3,9 +3,13 @@
 @section('content')
 
 @if(Session::has('success'))
-<div class="alert alert-success">
-    {{ Session::get('success') }}
-</div>
+    <div class="alert alert-success">
+        {{ Session::get('success') }}
+    </div>
+@else
+    <div class='alert alert-danger'>
+        All fields mark with * are required
+    </div>
 @endif
 <div class="card">
     <div class="card-body">
@@ -13,7 +17,7 @@
             @csrf
             @method('PUT')
             <div class="form-group mb-4">
-                <label>Date Issue</label>
+                <label>Date Issue <small class='text-danger'>*</small></label>
                 <input type="date" class="form-control {{ $errors->has('date') ? 'is-invalid' : '' }}" name="date"
                     value="{{ old('date') ?? $fuelSlip->issued_date->format('Y-m-d') }}">
                 @error('date')
@@ -22,7 +26,7 @@
             </div>
 
             <div class="form-group mb-4">
-                <label>Gasoline Station</label>
+                <label>Gasoline Station <small class='text-danger'>*</small></label>
                 <input type="text" class="form-control {{ $errors->has('gasoline_station') ? 'is-invalid' : '' }}"
                     name="gasoline_station" value="{{ old('gasoline_station') ?? $fuelSlip->gasoline_station }}">
                 @error('gasoline_station')
@@ -31,7 +35,7 @@
             </div>
 
             <div class="form-group mb-4">
-                <label>No. of liters</label>
+                <label>No. of liters <small class='text-danger'>*</small></label>
                 <input type="text" class="form-control {{ $errors->has('no_of_liters') ? 'is-invalid' : '' }}"
                     name="no_of_liters" value="{{ old('no_of_liters') ?? $fuelSlip->no_of_liters }}">
                 @error('no_of_liters')
@@ -40,7 +44,7 @@
             </div>
 
             <div class="form-group mb-4">
-                <label>Name of Driver</label>
+                <label>Name of Driver <small class='text-info'>(Optional)</small></label>
                 <input type="text" class="form-control {{ $errors->has('name_of_driver') ? 'is-invalid' : '' }}"
                     name="name_of_driver" value="{{ old('name_of_driver') ?? $fuelSlip->name }}">
                 @error('name_of_driver')
@@ -49,7 +53,7 @@
             </div>
 
             <div class="form-group mb-4">
-                <label>Vechile Plate #</label>
+                <label>Vechile Plate # <small class='text-info'>(Optional)</small></label>
                 <input type="text" class="form-control {{ $errors->has('vehicle_plate_no') ? 'is-invalid' : '' }}"
                     name="vehicle_plate_no" value="{{ old('vehicle_plate_no') ?? $fuelSlip->vehicle_plate_no }}">
                 @error('vehicle_plate_no')

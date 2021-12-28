@@ -24,7 +24,7 @@
 
 
     <nav class="navbar navbar-dark navbar-theme-primary px-4 col-12 d-lg-none">
-        <a class="navbar-brand me-lg-5" href="index.html">
+        <a class="navbar-brand me-lg-5" href="{{ route('login') }}">
             <img class="navbar-brand-dark" src="/img/brand/light.svg" alt="e-GAS Logo" /> <img
                 class="navbar-brand-light" src="/img/brand/dark.svg" alt="e-GAS Logo" />
         </a>
@@ -160,7 +160,7 @@
                                 </div>
                             </a>
                             <div class="dropdown-menu dashboard-dropdown dropdown-menu-end mt-2 py-1">
-                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                <a class="dropdown-item d-flex align-items-center" href="{{ route('profile.edit') }}">
                                     <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor"
                                         viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd"
@@ -190,7 +190,7 @@
             </div>
         </nav>
 
-        <div class="py-4">
+        {{-- <diav class="py-4">
             <div class="dropdown float-end">
                 <button class="btn btn-gray-800 d-inline-flex align-items-center me-2 dropdown-toggle"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -241,7 +241,7 @@
                     </a>
                 </div>
             </div>
-        </div>
+        </diav> --}}
         <div class="clearfix my-4"></div>
         @yield('content')
         {{-- p-5 --}}
@@ -266,7 +266,7 @@
     <!-- Sweet Alerts 2 -->
     <script src="{{ asset('/vendor/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
     <!-- Moment JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script> --}}
     <!-- Vanilla JS Datepicker -->
     <script src="{{ asset('/vendor/vanillajs-datepicker/dist/js/datepicker.min.js') }}"></script>
     <!-- Notyf -->
@@ -274,7 +274,7 @@
     <!-- Simplebar -->
     <script src="{{ asset('/vendor/simplebar/dist/simplebar.min.js') }}"></script>
     <!-- Github buttons -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script src="{{ asset('/js/buttons.min.js') }}"></script>
 
     <!-- Volt JS -->
     <script src="{{ asset('/js/volt.js') }}"></script>

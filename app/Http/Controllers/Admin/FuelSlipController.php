@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\FuelSlip;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Freshbitsweb\Laratables\Laratables;
@@ -31,16 +32,17 @@ class FuelSlipController extends Controller
             'date' => 'required|date|after_or_equal:' . date('Y-m-d'),
             'gasoline_station' => 'required',
             'no_of_liters'     => ['required','numeric', 'min: 1','max: 99.99', 'regex: /^\d+(\.\d{1,2})?$/'],
-            'name_of_driver'   => 'required',
-            'vehicle_plate_no' => ['required', 'regex:/^\w{3}-\d{4}$/'],
+            'name_of_driver'   => ['nullable', 'exclude_if:name_of_driver,-', 'min:2'],
+            'vehicle_plate_no' => ['nullable', 'max:8'],
         ]);
+
 
         FuelSlip::create([
             'issued_date'      => $request->date,
             'gasoline_station' => $request->gasoline_station,
             'no_of_liters'     => $request->no_of_liters,
             'name'             => $request->name_of_driver,
-            'vehicle_plate_no'  => $request->vehicle_plate_no
+            'vehicle_plate_no' => $request->vehicle_plate_no,
         ]);
 
         return back()->with('success', 'You successfully create new fuel slip.');
@@ -51,18 +53,18 @@ class FuelSlipController extends Controller
         $fuelSlip = FuelSlip::find($id);
         return view('administrator.fuelslip.edit', compact('fuelSlip'));
     }
-
+    
     public function update(Request $request, int $id)
     {
+        $fuelSlip = FuelSlip::find($id);
+
         $this->validate($request, [
-            'date' => 'required|date|after_or_equal:' . date('Y-m-d'),
+            'date' => 'required|date|after_or_equal:' .$fuelSlip->issued_date->format('Y-m-d'),
             'gasoline_station' => 'required',
             'no_of_liters' => ['required','numeric', 'min:1','max:99.99', 'regex:/^\d+(\.\d{1,2})?$/'],
-            'name_of_driver' => 'required',
-            'vehicle_plate_no' => ['required', 'regex:/^\w{3}-\d{4}$/'],
+            'name_of_driver' => ['nullable', 'exclude_if:name_of_driver,-', 'min:2'],
+            'vehicle_plate_no' => ['nullable', 'max:8'],
         ]);
-
-        $fuelSlip = FuelSlip::find($id);
 
         $fuelSlip->issued_date      = $request->date;
         $fuelSlip->gasoline_station = $request->gasoline_station;
@@ -72,6 +74,11 @@ class FuelSlipController extends Controller
         $fuelSlip->save();
 
         return back()->with('success', 'Fuel Slip successfully update');
+    }
+
+    public function show(int $id)
+    {
+        return FuelSlip::find($id);
     }
 
     public function destroy(int $id)

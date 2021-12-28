@@ -18,10 +18,8 @@ class CreateFuelSlipsTable extends Migration
             $table->date('issued_date');
             $table->string('gasoline_station');
             $table->float('no_of_liters');
-            $table->string('name');
-            $table->string('vehicle_plate_no');
-            $table->string('office')->nullable();
-            $table->string('office_head')->nullable();
+            $table->string('name')->nullable()->default('-');
+            $table->string('vehicle_plate_no')->nullable()->default('-');
             $table->softDeletes();
             $table->timestamps();
         });
