@@ -36,6 +36,10 @@
     </div>
     <br>
     <span>
+        ID : <strong>{{ $slip->id }}</strong>
+    </span>
+    <br>
+    <span>
         Date Issued : <strong>{{ date('F d, Y', strtotime($slip->issued_date)) }}</strong>
     </span>
     <br>

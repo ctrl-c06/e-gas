@@ -17,7 +17,7 @@ class PrintSlipController extends Controller
         $encryptor = new Encryptor("10001", 5);
         $qr = new QRCode();
         $pdf = App::make('snappy.pdf.wrapper');
-        $pdf->setOption('header-html',  view('print.header'));
+        // $pdf->setOption('header-html',  view('print.header'));
         $pdf->loadView('print.slip', compact('slips', 'encryptor', 'qr'))
                     ->setPaper('a4', 'portrait');
         return $pdf->inline();
@@ -38,7 +38,7 @@ class PrintSlipController extends Controller
         $encryptor = new Encryptor("10001", 5);
         $qr = new QRCode();
         $pdf = App::make('snappy.pdf.wrapper');
-        $pdf->setOption('header-html',  view('print.header'));
+        // $pdf->setOption('header-html',  view('print.header'));
         $pdf->loadView('print.one-slip', compact('slips', 'encryptor', 'qr'))
                     ->setPaper('a4', 'portrait');
         return $pdf->inline();
